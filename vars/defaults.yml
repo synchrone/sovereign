@@ -65,6 +65,7 @@ zpush_version: 2.1.1-1788
 # owncloud
 owncloud_domain: "cloud.{{ domain }}"
 owncloud_db_username: owncloud
+# owncloud_user_password (required)
 # owncloud_db_password: (required)
 owncloud_db_database: owncloud
 

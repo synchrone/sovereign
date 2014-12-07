@@ -44,6 +44,8 @@
 - name: Owncloud www directory
   file: state=directory path=/var/www/owncloud
 
+- name: Preconfigure owncloud
+  template: src=autoconfig.php.j2 dest=/var/www/owncloud/config/autoconfig.php group=www-data owner=www-data
 - name: Store ownCloud data securely
   command: mv /var/www/owncloud/data /decrypted/owncloud-data creates=/decrypted/owncloud-data
 - file: src=/decrypted/owncloud-data dest=/var/www/owncloud/data owner=www-data group=www-data state=link

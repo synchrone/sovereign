@@ -55,6 +55,7 @@ zpush_timezone: "TODO"  #Example: "America/New_York"
 
 # owncloud
 owncloud_db_password: TODO
+owncloud_user_password: TODO
 
 # vpn
 openvpn_key_country:  "US"

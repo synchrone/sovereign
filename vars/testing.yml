@@ -50,6 +50,7 @@ zpush_timezone: "America/New_York"  #Example: "America/New_York"
 
 # owncloud
 owncloud_db_password: testPassword
+owncloud_user_password: testPassword
 
 # vpn
 openvpn_key_country:  "US"

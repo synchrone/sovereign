@@ -1,0 +1,17 @@
+<?php
+$AUTOCONFIG = array(
+    "directory"     => "/var/www/owncloud/data",
+    "dbtype"        => "pgsql",
+    "dbname"        => "{{ owncloud_db_database }}",
+    "dbuser"        => "{{ owncloud_db_username }}",
+    "dbpass"        => "{{ owncloud_db_password }}",
+    "dbhost"        => "localhost",
+    "dbtableprefix" => "",
+    "adminlogin"    => "{{ main_user_name }}",
+    "adminpass"     => "{{ owncloud_user_password }}",
+    "trusted_domains" =>
+      array (
+        0 => "{{ owncloud_domain }}",
+        1 => "{{ owncloud_domain }}:443", // remote after https://github.com/owncloud/core/pull/12154 is released
+      ),
+);

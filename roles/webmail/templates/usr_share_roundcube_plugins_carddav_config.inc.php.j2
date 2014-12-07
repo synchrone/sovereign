@@ -183,3 +183,21 @@ $prefs['Work'] = array(
 	'hide'        =>  true,
 );
 */
+
+$prefs['ownCloud'] = array(
+    // required attributes
+    'name'         =>  'ownCloud',
+    // will be substituted for the roundcube username
+    'username'     =>  '{{ main_user_name }}',
+    // will be substituted for the roundcube password
+    'password'     =>  '{{ owncloud_user_password }}',
+    // %u will be substituted for the CardDAV username
+    'url'          =>  'https://{{ owncloud_domain }}/remote.php/carddav/addressbooks/{{ main_user_name }}/contacts',
+    'preemptive_auth' => true,
+
+    'active'       =>  true,
+    'readonly'     =>  false,
+    'refresh_time' => '00:01:00',
+    'fixed'        =>  array('name', 'username', 'url'),
+    'hide'        =>  true,
+);

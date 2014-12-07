@@ -64,9 +64,12 @@
   with_items:
   - { src: 'etc_roundcube_global.sieve',                                          dest: '/etc/roundcube/global.sieve' }
   - { src: 'etc_roundcube_main.inc.php',                                          dest: '/etc/roundcube/main.inc.php' }
-  - { src: 'usr_share_roundcube_plugins_carddav_config.inc.php',                  dest: '/usr/share/roundcube/plugins/carddav/config.inc.php' }
   - { src: 'usr_share_roundcube_plugins_managesieve_config.inc.php',              dest: '/usr/share/roundcube/plugins/managesieve/config.inc.php' }
   - { src: 'usr_share_roundcube_plugins_twofactor_gauthenticator_config.inc.php', dest: '/usr/share/roundcube/plugins/twofactor_gauthenticator/config.inc.php' }
+
+- name: Configure carddav plugin
+  template: src=usr_share_roundcube_plugins_carddav_config.inc.php.j2 dest=/usr/share/roundcube/plugins/carddav/config.inc.php
+  when: owncloud_user_password is defined
 
 - name: Enable roundcube site
   command: a2ensite roundcube.conf creates=/etc/apache2/sites-enabled/roundcube.conf

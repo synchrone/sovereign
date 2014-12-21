@@ -1,0 +1,3 @@
+INSERT IGNORE INTO public.appconfig (appid, configkey, configvalue) VALUES ('ojsxc', 'boshUrl', 'https://{{ owncloud_domain  }}/http-bind');
+INSERT IGNORE INTO public.appconfig (appid, configkey, configvalue) VALUES ('ojsxc', 'xmppDomain', '{{ prosody_virtual_domain }}');
+INSERT IGNORE INTO public.appconfig (appid, configkey, configvalue) VALUES ('ojsxc', 'xmppResource', 'ownCloud');

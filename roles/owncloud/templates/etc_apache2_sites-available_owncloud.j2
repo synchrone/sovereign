@@ -44,4 +44,11 @@
 
         Header set Cache-Control "public"
     </Directory>
+
+    <Location /http-bind>
+        Order allow,deny
+        Allow from all
+    </Location>
+    RewriteEngine On
+    RewriteRule ^/http-bind$ http://{{ prosody_virtual_domain }}:5280/http-bind [P,L]
 </VirtualHost>

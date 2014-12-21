@@ -8,6 +8,7 @@
     - php-apc
     - python-psycopg2
     - postgresql-9.3
+    - unzip
 
 - name: Set postgres password
   command: sudo -u {{ db_admin_username }} psql -d {{ db_admin_username }} -c "ALTER USER postgres with  password '{{ db_admin_password }}';"
@@ -48,6 +49,21 @@
 - name: Owncloud www directory
   file: state=directory path=/var/www/owncloud
 
+- name: Download xmpp plugin
+  get_url: url=http://apps.owncloud.com/CONTENT/content-files/162257-ojsxc-1.0.0.zip dest=~/ojsxc.zip
+
+- name: Install xmpp plugin
+  command: unzip ~/ojsxc.zip chdir=/var/www/owncloud/apps creates=/var/www/owncloud/apps/ojsxc
+
+- name: Enable xmpp plugin
+  command: sudo -u www-data php /var/www/owncloud/occ app:enable ojsxc
+
+- name: Create xmpp config sql
+  template: src=configure-ojsxc.sql.j2 dest=/var/www/owncloud/config/configure-ojsxc.sql
+
+- name: Import xmpp config sql
+  shell: sudo -u postgres psql {{ owncloud_db_database }} < /var/www/owncloud/config/configure-ojsxc.sql
+
 - name: Store ownCloud data securely
   command: mv /var/www/owncloud/data /decrypted/owncloud-data creates=/decrypted/owncloud-data
 - file: src=/decrypted/owncloud-data dest=/var/www/owncloud/data owner=www-data group=www-data state=link
@@ -62,6 +78,10 @@
 
 - name: Enable Apache expires module
   command: a2enmod expires creates=/etc/apache2/mods-enabled/expires.load
+  notify: restart apache
+
+- name: Enable Apache http proxy module
+  command: a2enmod proxy_http creates=/etc/apache2/mods-enabled/proxy_http.load
   notify: restart apache
 
 - name: Rename existing Apache owncloud virtualhost

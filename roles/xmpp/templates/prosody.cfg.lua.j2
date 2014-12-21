@@ -59,7 +59,7 @@ modules_enabled = {
 		--"admin_telnet"; -- Opens telnet console interface on localhost port 5582
 
 	-- HTTP modules
-		--"bosh"; -- Enable BOSH clients, aka "Jabber over HTTP"
+	    "bosh"; -- Enable BOSH clients, aka "Jabber over HTTP"
 		--"http_files"; -- Serve static files from a directory over HTTP
 
 	-- Other specific functionality
@@ -94,6 +94,7 @@ ssl = {
 -- prevent clients from authenticating unless they are using encryption.
 
 c2s_require_encryption = true
+consider_bosh_secure = true
 
 -- Force certificate authentication for server-to-server connections?
 -- This provides ideal security, but requires servers you communicate
